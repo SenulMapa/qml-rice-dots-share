@@ -1,0 +1,51 @@
+title = "qml-rice-dots gitleaks config"
+
+# Start from gitleaks' maintained default ruleset and layer project-specific
+# rules on top. See tools/privacy-audit.sh for the complementary
+# non-gitleaks checks (personal-ID denylist, EXIF, attack-surface warnings).
+[extend]
+useDefault = true
+
+[[rules]]
+id = "kie-ai-token"
+description = "kie.ai API key/token"
+regex = '''(?i)kie\.ai[^\n]{0,40}?(api[_-]?key|token)[^\n]{0,10}[:=]\s*['"]?[A-Za-z0-9_-]{16,}['"]?'''
+tags = ["key", "kie.ai"]
+
+[[rules]]
+id = "figma-personal-access-token"
+description = "Figma personal access token"
+regex = '''figd_[A-Za-z0-9_-]{20,}'''
+tags = ["key", "figma"]
+
+[[rules]]
+id = "figma-file-token-url"
+description = "Figma URL carrying an access_token/token query param"
+regex = '''https?://(?:www\.)?figma\.com/[^\s'"]*[?&](access_token|token)=[A-Za-z0-9_-]+'''
+tags = ["key", "figma"]
+
+[[rules]]
+id = "openweather-appid"
+description = "OpenWeatherMap appid key in URL"
+regex = '''api\.openweathermap\.org/[^\s'"]*appid=[A-Za-z0-9]{16,}'''
+tags = ["key", "openweather"]
+
+[[rules]]
+id = "spotify-client-secret"
+description = "Spotify client secret assignment"
+regex = '''(?i)spotify[_-]?(client[_-]?secret)[[:space:]]*[:=]\s*['"]?[A-Za-z0-9_-]{20,}['"]?'''
+tags = ["key", "spotify"]
+
+[[rules]]
+id = "discord-webhook-url"
+description = "Discord webhook URL"
+regex = '''https://discord(app)?\.com/api/webhooks/[0-9]+/[A-Za-z0-9_-]+'''
+tags = ["webhook", "discord"]
+
+[allowlist]
+description = "paths excluded from scanning"
+paths = [
+  '''(^|/)\.git/''',
+  '''(^|/)node_modules/''',
+  '''(^|/)vendor/''',
+]

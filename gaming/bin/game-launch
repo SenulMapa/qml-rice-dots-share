@@ -1,0 +1,53 @@
+#!/usr/bin/env bash
+# Steam launch wrapper:  game-launch %command%
+# 1280x960 stretched to 1920x1080 on DP-1, upscaled on the GPU (NVIDIA Image
+# Scaling) by gamescope, fullscreen. Hyprland rules put the window on
+# workspace 10 (see ~/.config/hypr/gaming.lua).
+# Falls back to a plain launch if gamescope isn't installed, so a missing
+# package can never stop the game from starting.
+set -u
+W=${GAME_W:-1280} H=${GAME_H:-960} OW=${GAME_OW:-1920} OH=${GAME_OH:-1080} R=${GAME_R:-240}
+# nis/fsr crash gamescope 3.16.28 on this RTX 5060 driver (vkAllocateMemory failed,
+# "failed to create fsr output", SIGSEGV) -- verified headless 23 Sep. Linear
+# (bilinear GPU scaling) is smooth, not pixelated. Try GAME_FILTER=nis after updates.
+FILTER=${GAME_FILTER:-linear}
+
+# Never let the NVIDIA driver trim its compiled-shader cache: CS2's pipeline set
+# outgrows the default cap, and evicted pipelines recompile mid-match (stutter).
+export __GL_SHADER_DISK_CACHE_SKIP_CLEANUP=1
+
+# CS2: own driver cache, outside Steam's shadercache dir. Steam's NVIDIA merger
+# corrupts its merged cache past 4 GiB ("Mismatching key!", steam-for-linux
+# #13622), so every update recompiled from scratch. Steam never touches this
+# dir. Seeded once (reflink, free on btrfs) from Steam's cache, which is read
+# only; new pipelines go to cs2_* and persist. Shader pre-caching is off.
+if [ "${SteamAppId:-}" = 730 ]; then
+    cs2c=$HOME/.cache/nvidia-cs2
+    if [ ! -d "$cs2c" ]; then
+        mkdir -p "$cs2c"
+        cp -a --reflink=auto "$HOME/.local/share/Steam/steamapps/shadercache/730/nvidiav1/." "$cs2c/" 2>/dev/null || true
+    fi
+    ro=steamapp_merged_shader_cache
+    for i in $(seq 0 30); do ro+=";steamapp_shader_cache$i"; done
+    export __GL_SHADER_DISK_CACHE_PATH=$cs2c
+    export __GL_SHADER_DISK_CACHE_APP_NAME=cs2
+    export __GL_SHADER_DISK_CACHE_READ_ONLY_APP_NAME=$ro
+    export __GL_SHADER_DISK_CACHE_SIZE=17179869184
+fi
+
+run=("$@")
+command -v gamemoderun >/dev/null && run=(gamemoderun "${run[@]}")
+
+# Strip shell decorations for the session (restored on exit).
+gm=$HOME/.config/hypr/scripts/gamemode.sh
+[ -x "$gm" ] && "$gm" on >/dev/null 2>&1 || true
+trap '[ -x "$gm" ] && "$gm" off >/dev/null 2>&1' EXIT
+
+if command -v gamescope >/dev/null; then
+    gamescope -w "$W" -h "$H" -W "$OW" -H "$OH" -r "$R" \
+        -S stretch -F "$FILTER" -f --force-grab-cursor --immediate-flips \
+        -- "${run[@]}"
+else
+    echo "[game-launch] gamescope missing: sudo pacman -S gamescope" >&2
+    "${run[@]}"
+fi

@@ -1,0 +1,41 @@
+module desktop.services
+
+singleton DeskTheme 1.0 DeskTheme.qml
+singleton DeskSettings 1.0 DeskSettings.qml
+singleton DeskDesktopService 1.0 DeskDesktopService.qml
+singleton ModuleService 1.0 ModuleService.qml
+singleton NotesService 1.0 NotesService.qml
+singleton DeckService 1.0 DeckService.qml
+
+# Phase 3: adapters over the shell's own services/ singletons (battery,
+# audio/volume, brightness, network, bluetooth, media/MPRIS), plus two
+# self-contained ports with no shell equivalent (stats, timer).
+singleton DeskBatteryService 1.0 DeskBatteryService.qml
+singleton DeskAudioService 1.0 DeskAudioService.qml
+singleton DeskBrightnessService 1.0 DeskBrightnessService.qml
+singleton DeskNetworkService 1.0 DeskNetworkService.qml
+singleton DeskBluetoothService 1.0 DeskBluetoothService.qml
+singleton DeskMediaService 1.0 DeskMediaService.qml
+singleton DeskStatsService 1.0 DeskStatsService.qml
+singleton DeskTimerService 1.0 DeskTimerService.qml
+singleton DeskTasksService 1.0 DeskTasksService.qml
+
+# Phase 4: content modules, ported closer to upstream (each has its own
+# scripts/desktop/*.py; no shell equivalent for any of these).
+singleton DeskGithubService 1.0 DeskGithubService.qml
+singleton DeskUpdatesService 1.0 DeskUpdatesService.qml
+singleton DeskWeatherService 1.0 DeskWeatherService.qml
+singleton DeskPetService 1.0 DeskPetService.qml
+singleton DeskGamesService 1.0 DeskGamesService.qml
+singleton DeskClaudeService 1.0 DeskClaudeService.qml
+
+# Impasto island cards phase: adapter over services/ScreenRecService.qml.
+singleton DeskRecorderService 1.0 DeskRecorderService.qml
+
+# impasto-settings-full: shared `hyprctl keyword` runner for Input/Displays/
+# Appearance's live-apply controls (see DeskHyprctlService.qml's own header).
+singleton DeskHyprctlService 1.0 DeskHyprctlService.qml
+
+# impasto-settings-full: installed-font scan for settings-impasto's
+# FontPicker.qml (see DeskFontService.qml's own header).
+singleton DeskFontService 1.0 DeskFontService.qml

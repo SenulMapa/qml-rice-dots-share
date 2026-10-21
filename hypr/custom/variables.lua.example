@@ -1,0 +1,4 @@
+-- Copy this file to custom/variables.lua (without the .example suffix) to
+-- override any of hyprland/variables.lua without editing a tracked file.
+-- Example: prefer a different terminal.
+-- terminal = "~/.config/hypr/hyprland/scripts/launch_first_available.sh 'foot' 'kitty -1'"

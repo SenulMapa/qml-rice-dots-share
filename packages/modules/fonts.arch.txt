@@ -1,0 +1,15 @@
+# Official-repo fonts the shell and dots need at runtime, beyond the fonts
+# vendored under fonts/ in this repo (installed separately, see install.sh's
+# fonts module and the README's Fonts section).
+#
+# ttf-jetbrains-mono-nerd / ttf-cascadia-code-nerd: the Nerd Font glyph sets
+# the shell (wifi/volume icons, md-* codepoints) and kitty (CaskaydiaCove
+# Nerd Font) render against.
+# ttf-nerd-fonts-symbols: standalone Nerd Font symbols, used as a fallback
+# glyph source by fontconfig when an app's own font lacks an icon codepoint.
+# ttf-material-symbols-variable: hyprlock's $font_material_symbols (Material
+# Symbols Rounded).
+ttf-jetbrains-mono-nerd
+ttf-cascadia-code-nerd
+ttf-nerd-fonts-symbols
+ttf-material-symbols-variable

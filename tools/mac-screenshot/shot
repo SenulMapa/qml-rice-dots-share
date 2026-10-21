@@ -1,0 +1,203 @@
+#!/usr/bin/env bash
+# mac-screenshot: macOS-style screenshots for Hyprland.
+#
+#   shot area     region picker (slurp). Bound to SUPER+SHIFT+S.
+#   shot window   the active window (hyprctl activewindow)
+#   shot screen   the focused monitor
+#   shot pick     small chooser (fuzzel); falls back to area without fuzzel
+#
+# Each capture is saved to ~/Pictures/Screenshots/ as
+# "Screenshot YYYY-MM-DD at HH.MM.SS.png", copied to the clipboard (wl-copy),
+# and announced to the Quickshell thumbnail by appending one JSON line to
+# $XDG_RUNTIME_DIR/qml-rice/mac-shot.jsonl (read by shell/mac/MacShotThumbnail.qml).
+#
+# The queue lives only in the per-user runtime dir. There is no /tmp fallback:
+# the directory must be owned by you, a real directory (not a symlink), mode 0700.
+#
+# --dry-run prints the steps it would take. It runs no compositor query and
+# writes nothing.
+set -euo pipefail
+umask 077
+
+usage() {
+    cat <<'EOF'
+usage: mac-shot {area|window|screen|pick} [--dry-run]
+EOF
+}
+
+die() {
+    echo "mac-shot: $*" >&2
+    exit 1
+}
+
+MODE=""
+DRY_RUN=0
+for arg in "$@"; do
+    case "$arg" in
+        area | window | screen | pick) MODE="$arg" ;;
+        --dry-run) DRY_RUN=1 ;;
+        -h | --help)
+            usage
+            exit 0
+            ;;
+        *)
+            echo "mac-shot: unknown argument: $arg" >&2
+            usage >&2
+            exit 2
+            ;;
+    esac
+done
+
+if [[ -z "$MODE" ]]; then
+    usage >&2
+    exit 2
+fi
+
+OUT_DIR="$HOME/Pictures/Screenshots"
+QUEUE_KEEP=50
+
+# Runtime base: $XDG_RUNTIME_DIR, else /run/user/<uid>. Anything else is refused.
+runtime_base() {
+    local base="${XDG_RUNTIME_DIR:-}"
+    if [[ -n "$base" && -d "$base" ]]; then
+        printf '%s\n' "$base"
+        return 0
+    fi
+    base="/run/user/$(id -u)"
+    [[ -d "$base" ]] || die "no runtime dir (XDG_RUNTIME_DIR unset and $base missing); refusing to write the queue elsewhere"
+    printf '%s\n' "$base"
+}
+
+# Creates the queue dir and refuses unless it is ours, real, and 0700.
+verify_queue_dir() {
+    local dir="$1"
+    # Create only when absent: install -d would re-chmod an existing dir and hide a bad mode.
+    if [[ ! -e "$dir" && ! -L "$dir" ]]; then
+        install -d -m 0700 -- "$dir" 2>/dev/null || die "cannot create $dir"
+    fi
+    [[ -d "$dir" && ! -L "$dir" ]] || die "$dir is not a real directory"
+    [[ "$(stat -c '%u' -- "$dir")" == "$(id -u)" ]] || die "$dir is not owned by you"
+    [[ "$(stat -c '%a' -- "$dir")" == "700" ]] || die "$dir must be mode 0700"
+}
+
+# Picks a unique file name in the screenshot folder. Two captures in the same
+# second get " (2)", " (3)" and so on, like macOS does.
+make_file() {
+    local stamp base file n=2
+    stamp="$(date '+%Y-%m-%d at %H.%M.%S')"
+    base="$OUT_DIR/Screenshot $stamp"
+    file="$base.png"
+    while [[ -e "$file" ]]; do
+        file="$base ($n).png"
+        n=$((n + 1))
+    done
+    printf '%s\n' "$file"
+}
+
+# Resolves "pick" to a concrete mode. Prints the mode name, or nothing when
+# the user cancels.
+resolve_pick() {
+    if ! command -v fuzzel >/dev/null 2>&1; then
+        echo area
+        return 0
+    fi
+    local choice
+    choice="$(printf 'Area\nWindow\nScreen\n' |
+        fuzzel --dmenu --prompt 'Screenshot: ' 2>/dev/null || true)"
+    case "$choice" in
+        Area) echo area ;;
+        Window) echo window ;;
+        Screen) echo screen ;;
+        *) return 0 ;;
+    esac
+}
+
+if [[ $DRY_RUN -eq 1 ]]; then
+    if [[ "$MODE" == "pick" ]]; then
+        echo "dry-run: pick -> fuzzel --dmenu (Area|Window|Screen), area if fuzzel is missing"
+        MODE="area"
+    fi
+    echo "dry-run: mode=$MODE"
+    case "$MODE" in
+        area)
+            echo "dry-run: region = slurp (cancel exits quietly)"
+            echo "dry-run: capture = grim -g <region> <file>"
+            ;;
+        window)
+            echo "dry-run: geometry = hyprctl activewindow -j (at + size)"
+            echo "dry-run: capture = grim -g '<x>,<y> <w>x<h>' <file>"
+            ;;
+        screen)
+            echo "dry-run: monitor = hyprctl monitors -j (focused)"
+            echo "dry-run: capture = grim -o <monitor> <file>"
+            ;;
+    esac
+    echo "dry-run: file = $OUT_DIR/Screenshot YYYY-MM-DD at HH.MM.SS.png"
+    echo "dry-run: mkdir -p $OUT_DIR"
+    echo "dry-run: wl-copy --type image/png < <file>"
+    echo "dry-run: queue dir = ${XDG_RUNTIME_DIR:-/run/user/<uid>}/qml-rice (install -d -m 0700, must be yours, real dir, mode 0700; no /tmp fallback)"
+    echo "dry-run: append {id,path,mode} line to <queue dir>/mac-shot.jsonl (keep last $QUEUE_KEEP)"
+    exit 0
+fi
+
+for tool in grim wl-copy jq; do
+    command -v "$tool" >/dev/null 2>&1 ||
+        die "missing $tool (packages: grim, slurp, wl-clipboard, jq; fuzzel for pick)"
+done
+
+# Resolve and verify the queue location before capturing anything.
+QDIR="$(runtime_base)/qml-rice"
+verify_queue_dir "$QDIR"
+QUEUE="$QDIR/mac-shot.jsonl"
+[[ ! -L "$QUEUE" ]] || die "$QUEUE is a symlink; refusing"
+
+if [[ "$MODE" == "pick" ]]; then
+    MODE="$(resolve_pick)"
+    [[ -n "$MODE" ]] || exit 0
+fi
+
+mkdir -p "$OUT_DIR"
+FILE="$(make_file)"
+
+case "$MODE" in
+    area)
+        command -v slurp >/dev/null 2>&1 || die "missing slurp"
+        # Escape or right click in slurp exits non-zero: that is a cancel, not an error.
+        GEOM="$(slurp 2>/dev/null)" || exit 0
+        [[ -n "$GEOM" ]] || exit 0
+        grim -g "$GEOM" "$FILE"
+        ;;
+    window)
+        GEOM="$(hyprctl activewindow -j |
+            jq -r 'select(.size[0] > 0 and .size[1] > 0)
+                | "\(.at[0]),\(.at[1]) \(.size[0])x\(.size[1])"')"
+        [[ -n "$GEOM" ]] || die "no active window to capture"
+        grim -g "$GEOM" "$FILE"
+        ;;
+    screen)
+        MON="$(hyprctl monitors -j | jq -r '.[] | select(.focused) | .name' | head -n1)"
+        [[ -n "$MON" ]] || die "no focused monitor"
+        grim -o "$MON" "$FILE"
+        ;;
+esac
+
+# A cancelled or failed grim can leave an empty file behind: drop it.
+if [[ ! -s "$FILE" ]]; then
+    rm -f -- "$FILE"
+    exit 1
+fi
+
+wl-copy --type image/png <"$FILE"
+
+ID="$(date +%s%N)-$$"
+LINE="$(jq -cn --arg id "$ID" --arg path "$FILE" --arg mode "$MODE" \
+    '{id: $id, path: $path, mode: $mode}')"
+printf '%s\n' "$LINE" >>"$QUEUE"
+
+# Keep the queue short. The shell only reads lines it has not seen, so
+# trimming old entries is safe. The temp file lives in the verified dir.
+TMP="$(mktemp -p "$QDIR" 'mac-shot.XXXXXX')"
+trap 'rm -f -- "$TMP"' EXIT
+tail -n "$QUEUE_KEEP" -- "$QUEUE" >"$TMP"
+mv -f -- "$TMP" "$QUEUE"
+trap - EXIT

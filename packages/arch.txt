@@ -1,0 +1,36 @@
+# Official Arch repos (pacman -S --needed).
+# One package name per line. Lines starting with # are ignored.
+
+hyprland
+hypridle
+hyprlock
+quickshell
+cava
+playerctl
+pipewire
+wireplumber
+brightnessctl
+cliphist
+wl-clipboard
+inotify-tools
+grim
+slurp
+nwg-displays
+networkmanager
+bluez
+bluez-utils
+polkit
+hyprpicker
+fuzzel
+tesseract
+tesseract-data-eng
+geoclue
+jq
+curl
+kitty
+gnome-keyring
+easyeffects
+xdg-user-dirs
+go
+wf-recorder
+ffmpeg

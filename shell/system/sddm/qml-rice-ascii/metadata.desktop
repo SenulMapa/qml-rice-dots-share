@@ -1,0 +1,23 @@
+# qml-rice-ascii -- SDDM greeter theme matching lock/AsciiLockSurface.qml's
+# waving, mouse-tilted, hue-rotating ASCII clock. Self-contained QtQuick
+# (no Quickshell, no shell Theme singleton -- the greeter runs as the
+# `sddm` user and cannot read the owner's home directory).
+#
+# ConfigFile points at theme.conf, whose [General] section is populated at
+# INSTALL TIME by scripts/install-sddm-ascii-theme.sh from the owner's live
+# wallpaper-derived palette (core/Theme.qml's Config.appearance.activePalettePath,
+# e.g. ~/.local/state/odyssey/palette.json). Main.qml reads it through the
+# `config` context object with hardcoded dark fallbacks, so the theme still
+# renders correctly even if the palette was never baked in.
+
+[SddmGreeterTheme]
+Name=qml-rice-ascii
+Description=The ASCII lock's waving hue-rotating clock, as the login screen
+Author=SenulMapa
+License=GPL-3.0
+Type=sddm-theme
+Version=1.0
+Website=https://github.com/andreumassanet/impasto
+QtVersion=6
+MainScript=Main.qml
+ConfigFile=theme.conf

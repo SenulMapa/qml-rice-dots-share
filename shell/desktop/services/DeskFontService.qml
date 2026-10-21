@@ -1,0 +1,51 @@
+// ported from impasto services/FontService.qml, verbatim except:
+// Quickshell.shellPath("scripts/fonts.py") -> Quickshell.shellDir +
+// "/scripts/fonts.py", matching this repo's own existing convention for
+// resolving a shipped script (see services/WallpaperService.qml's
+// `helperPath`) rather than impasto's shellPath() call -- same script,
+// same relative location, just this shell's usual spelling. scripts/
+// fonts.py itself is otherwise byte-for-byte unchanged (see that file's
+// own header).
+// GPL-3.0, Andreu Massanet.
+//
+// F O N T   S E R V I C E
+// installed fonts
+
+pragma Singleton
+
+import QtQuick
+import Quickshell
+import Quickshell.Io
+
+// Loaded on demand: only the settings window ever asks, and fontconfig takes
+// long enough that doing it at startup would delay the shell for nothing.
+Singleton {
+    id: root
+
+    property var sans: []
+    property var mono: []
+    property bool loaded: false
+
+    readonly property Process query: Process {
+        command: [Quickshell.shellDir + "/scripts/fonts.py"]
+        stdout: StdioCollector {
+            onStreamFinished: {
+                if (!text || text.trim() === "")
+                    return
+                try {
+                    const result = JSON.parse(text)
+                    root.sans = result.sans ?? []
+                    root.mono = result.mono ?? []
+                    root.loaded = true
+                } catch (error) {
+                    console.warn("qml-rice DeskFontService: cannot parse the font list:", error)
+                }
+            }
+        }
+    }
+
+    function load(): void {
+        if (!root.loaded)
+            root.query.running = true
+    }
+}

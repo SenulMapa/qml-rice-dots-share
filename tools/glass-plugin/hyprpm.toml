@@ -1,0 +1,19 @@
+[repository]
+name = "qmlrice-glass"
+authors = ["qml-rice"]
+description = "Liquid-glass render effect for selected layer-shell surfaces"
+
+# Pinned to exactly one Hyprland build, efb50993780079460b0cbed1363e2166a2de1d9f (v0.56.2).
+# hyprpm commit_pins map a Hyprland commit to a commit of THIS repo, and this plugin lives in a
+# subdirectory of the dots repo, so there is no standalone commit to pin to. The pin is therefore
+# enforced at load time instead: PLUGIN_INIT throws unless the running Hyprland commit is exactly
+# the one above. Build with cmake (see README); hyprpm is not the supported path.
+
+[qmlrice-glass]
+description = "Liquid-glass render effect for selected layer-shell surfaces"
+authors = ["qml-rice"]
+output = "build/qmlrice-glass.so"
+build = [
+  "cmake -S . -B build -DCMAKE_BUILD_TYPE=Release",
+  "cmake --build build -j2",
+]

@@ -1,0 +1,215 @@
+{
+ "OBS Studio.desktop": {
+  "name": "OBS Studio",
+  "sha256": "e4f7c9445460fee874d3ab90e6ee53359fef5630a90381d22c61248ac091d033",
+  "source": "official",
+  "url": "https://raw.githubusercontent.com/obsproject/obs-studio/master/cmake/macos/resources/AppIcon.icns"
+ },
+ "appimagekit_8a3d2160532577766e318db564dd8402-Obsidian.desktop": {
+  "name": "Obsidian (1.12.7)",
+  "source": "macosicons",
+  "url": "https://s3-new.macosicons.com/macosicons/parse/Obsidian_H39hbMdW49_lowResPng-05756a39d9.png"
+ },
+ "appimagekit_c81fc947e5374284ed9577e10d4d6c5e-Arduino_IDE.desktop": {
+  "name": "Arduino IDE (2.3.8)",
+  "sha256": "7d3177096c65b7841560dfad864c26d7bbf5d34cb5a0ae348d2e40e662a69a28",
+  "source": "official",
+  "url": "https://raw.githubusercontent.com/arduino/arduino-ide/main/electron-app/resources/icon.icns"
+ },
+ "appimagekit_d3dac3de7b16cf102bcb71f07ac1ee8f-Handy.desktop": {
+  "name": "Handy",
+  "sha256": "9a6709dfaf4d07af70c477a7010738dba6f1c73ddaf719305f25e4e73e8fee32",
+  "source": "official",
+  "url": "https://raw.githubusercontent.com/cjpais/Handy/main/src-tauri/icons/icon.icns"
+ },
+ "blueman-manager.desktop": {
+  "name": "Bluetooth Manager",
+  "source": "macosicons",
+  "url": "https://s3-new.macosicons.com/macosicons/parse/Bluetooth_3AbVp8CJJ0_lowResPng-734c51c1e4.png"
+ },
+ "brave-browser.desktop": {
+  "name": "Brave",
+  "sha256": "a2099b7d16f22c0ee261e4bf233f4ce88d83c3ba123bb0dfccb2a960f97033bf",
+  "source": "official",
+  "url": "https://raw.githubusercontent.com/brave/brave-core/master/app/theme/brave/mac/app.icns"
+ },
+ "chatgpt.desktop": {
+  "name": "ChatGPT",
+  "source": "macosicons",
+  "url": "https://s3-new.macosicons.com/macosicons/parse/chatgpt_dL3HF5NBJS_lowResPng-16e6e5d070.png"
+ },
+ "code-oss.desktop": {
+  "name": "Code - OSS",
+  "sha256": "9a8e62dcb766f84eef6debdb2d59d1222a1f102c18f8ffc9de157f1cdc509926",
+  "source": "official",
+  "url": "https://raw.githubusercontent.com/microsoft/vscode/main/resources/darwin/code.icns"
+ },
+ "codium.desktop": {
+  "name": "VSCodium",
+  "sha256": "1d325b4d4dbbadf50a6b244c79e17363d86871787c3e91be7dcee669222ce553",
+  "source": "official",
+  "url": "https://raw.githubusercontent.com/VSCodium/vscodium/master/src/stable/resources/darwin/code.icns"
+ },
+ "com.anthropic.Claude.desktop": {
+  "name": "Claude",
+  "source": "macosicons",
+  "url": "https://s3-new.macosicons.com/macosicons/parse/claude_S3yHWwNTf2_lowResPng-feebb3f5f3.png"
+ },
+ "com.moonlight_stream.Moonlight.desktop": {
+  "name": "Moonlight",
+  "sha256": "89d1c951c284b8ccfa060dc60dafd742e0d8fa40a9a6ffc9f934681d721629dd",
+  "source": "official",
+  "url": "https://raw.githubusercontent.com/moonlight-stream/moonlight-qt/master/app/moonlight.icns"
+ },
+ "dev.zed.Zed.desktop": {
+  "name": "Zed",
+  "source": "macosicons",
+  "url": "https://s3-new.macosicons.com/macosicons/parse/Zed_WPDPLClxbw_lowResPng-d5b3f0f116.png"
+ },
+ "discord.desktop": {
+  "name": "Discord",
+  "source": "macosicons",
+  "url": "https://s3-new.macosicons.com/macosicons/parse/discord_TZYdQxaLtF_lowResPng-9ac3777f71.png"
+ },
+ "figma-linux.desktop": {
+  "name": "Figma Linux",
+  "sha256": "f02d85f1e69a793c4aaec7b0732afc4b1039a4015a4560aff9ededbb93712a96",
+  "source": "macosicons-official",
+  "url": "https://s3-new.macosicons.com/macosicons/parse/Figma_GdeyafL4j1-4a53dc97aa.icns"
+ },
+ "firefox.desktop": {
+  "name": "Firefox",
+  "sha256": "2950470878ae6059faf092886d78d388d648ebe5e1e9a67d423cbf40c17b3006",
+  "source": "macosicons-official",
+  "url": "https://s3-new.macosicons.com/macosicons/parse/Firefox_macOS_27_WsZWpqYdwW-e6dee21206.icns"
+ },
+ "jetbrains-idea-ea261ce2-d752-4592-a357-359f3be0e8ba.desktop": {
+  "name": "IntelliJ IDEA 2026.2.3",
+  "source": "macosicons",
+  "url": "https://s3-new.macosicons.com/macosicons/parse/IntelliJ_IDEA_4Gn903RxVC_lowResPng-ce168bebfa.png"
+ },
+ "jetbrains-toolbox.desktop": {
+  "name": "JetBrains Toolbox",
+  "source": "macosicons",
+  "url": "https://s3-new.macosicons.com/macosicons/parse/JetBrains_Toolbox_fWR09Xjsda_lowResPng-c76234e0dd.png"
+ },
+ "kitty.desktop": {
+  "name": "kitty",
+  "sha256": "f02dc75cfacfcb786c44d6903ae48d2fed8cdde6510f2e5c731f50162049e210",
+  "source": "official",
+  "url": "https://raw.githubusercontent.com/kovidgoyal/kitty/master/logo/kitty.icns"
+ },
+ "libreoffice-calc.desktop": {
+  "name": "LibreOffice Calc",
+  "source": "macosicons",
+  "url": "https://s3-new.macosicons.com/macosicons/parse/LibreOffice_Calc_wNytxpBOsh_lowResPng-572565c9ad.png"
+ },
+ "libreoffice-impress.desktop": {
+  "name": "LibreOffice Impress",
+  "source": "macosicons",
+  "url": "https://s3-new.macosicons.com/macosicons/parse/LibreOffice_Impress_wy487Z2p5s_lowResPng-11663b233b.png"
+ },
+ "libreoffice-startcenter.desktop": {
+  "name": "LibreOffice",
+  "source": "itunes",
+  "url": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/7b/39/0b/7b390b2f-9b36-3744-512f-0dd725213eeb/main.png/1024x1024bb.png"
+ },
+ "libreoffice-writer.desktop": {
+  "name": "LibreOffice Writer",
+  "source": "macosicons",
+  "url": "https://s3-new.macosicons.com/macosicons/parse/LibreOffice_Writer_DilCTmKfnI_lowResPng-aa0992ed4e.png"
+ },
+ "localsend.desktop": {
+  "name": "LocalSend",
+  "sha256": "0c57f94cb4fa4902a1f35d34a65c69685b4bb7ebbf5d3f288c9974b9477a3bb0",
+  "source": "macosicons-official",
+  "url": "https://s3-new.macosicons.com/macosicons/parse/LocalSend_uu76GOdJBX-33a73ce7c0.icns"
+ },
+ "mpv.desktop": {
+  "name": "mpv Media Player",
+  "source": "macosicons",
+  "url": "https://s3-new.macosicons.com/macosicons/parse/MPV_scAcHBvdpy_lowResPng-6022b3d1d0.png"
+ },
+ "nvidia-settings.desktop": {
+  "name": "NVIDIA X Server Settings",
+  "source": "macosicons",
+  "url": "https://s3-new.macosicons.com/macosicons/parse/low_res_Nvidia_KPUbXDGVZX-53488190b1.png"
+ },
+ "nvim.desktop": {
+  "name": "Neovim",
+  "source": "macosicons",
+  "url": "https://s3-new.macosicons.com/macosicons/parse/neovim_t6M8yMdyOc_lowResPng-ddbd2cddb7.png"
+ },
+ "org.deskflow.deskflow.desktop": {
+  "name": "Deskflow",
+  "sha256": "6c3ac864c0b6d09e60cd6cc683ca6dc3be32aec2a3361afa26740d343b1de222",
+  "source": "official",
+  "url": "https://raw.githubusercontent.com/deskflow/deskflow/master/src/apps/res/Deskflow.icns"
+ },
+ "org.fontforge.FontForge.desktop": {
+  "name": "FontForge",
+  "source": "macosicons",
+  "url": "https://s3-new.macosicons.com/macosicons/parse/FontForge_okNJt28ycr_lowResPng-470369f379.png"
+ },
+ "org.kde.dolphin.desktop": {
+  "name": "Dolphin",
+  "source": "macosicons",
+  "url": "https://s3-new.macosicons.com/macosicons/parse/dolphin_N7laRljuVL_lowResPng-ce5218ce60.png"
+ },
+ "org.telegram.desktop.desktop": {
+  "name": "Telegram",
+  "sha256": "f44ab15337b55916dfb0155eb2556acdb134dac880a9664278e29566639ceba6",
+  "source": "macosicons-official",
+  "url": "https://s3-new.macosicons.com/macosicons/parse/Telegram_dQqA49CHzl-a8d8bfcb83.icns"
+ },
+ "qalculate-gtk.desktop": {
+  "name": "Qalculate!",
+  "source": "macosicons",
+  "url": "https://s3-new.macosicons.com/macosicons/parse/low_res_Folder_-_Calculate_Ni4hSIJqvg-c56363b054.png"
+ },
+ "slack.desktop": {
+  "name": "Slack",
+  "sha256": "161225199f2a99ee97b66357c2db11b5e9a4acf0f8a7940a3a25e7f70ebc5339",
+  "source": "macosicons-official",
+  "url": "https://s3-new.macosicons.com/macosicons/parse/Slack_UgdZwjmwBf-c6658522ef.icns"
+ },
+ "spotify.desktop": {
+  "name": "Spotify",
+  "sha256": "49a4e545833ed2ffc017276a3f93d567086d26aec99edc510b9170de0dffb107",
+  "source": "macosicons-official",
+  "url": "https://s3-new.macosicons.com/macosicons/parse/Spotify_KqWJyVq6fL-1aade2caf0.icns"
+ },
+ "steam.desktop": {
+  "name": "Steam",
+  "sha256": "061728e3130afa24bd1b2bea831b5138d25d522dc3b4c3f44c5feae551fd5e1e",
+  "source": "macosicons-official",
+  "url": "https://s3-new.macosicons.com/macosicons/parse/Steam_GItfab6TvC-1a2cdf877b.icns"
+ },
+ "t3code.desktop": {
+  "name": "T3 Code",
+  "source": "papirus"
+ },
+ "todoist.desktop": {
+  "name": "Todoist",
+  "sha256": "99893a322cf2fba6bd40eb521ba6e8e3b668a73ab7d01c01049b8da4b8f25b81",
+  "source": "macosicons-official",
+  "url": "https://s3-new.macosicons.com/macosicons/parse/Todoist_Q1LyWBVXri-a41f1cbe30.icns"
+ },
+ "vesktop.desktop": {
+  "name": "Vesktop",
+  "sha256": "b25cdde27bd68aca5d684564e92bb3a4cfe1e437219146968ddead544143369e",
+  "source": "official",
+  "url": "https://raw.githubusercontent.com/Vencord/Vesktop/main/build/icon.icns"
+ },
+ "vivaldi-stable.desktop": {
+  "name": "Vivaldi",
+  "source": "macosicons",
+  "url": "https://s3-new.macosicons.com/macosicons/parse/Vivaldi_p60wVIFJyz_lowResPng-7d6f8468ea.png"
+ },
+ "zen.desktop": {
+  "name": "Zen Browser",
+  "sha256": "9e27e02a924c73c0101757aa6f726ec6a91f7e908bcc900e9a4dab2c8cd3e61a",
+  "source": "official",
+  "url": "https://raw.githubusercontent.com/zen-browser/desktop/dev/configs/branding/release/logo.png"
+ }
+}

@@ -1,0 +1,3 @@
+thunar
+gvfs
+thunar-volman

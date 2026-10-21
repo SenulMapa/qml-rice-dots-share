@@ -1,0 +1,9 @@
+zsh
+starship
+zoxide
+fzf
+eza
+bat
+zsh-autosuggestions
+zsh-syntax-highlighting
+zsh-completions

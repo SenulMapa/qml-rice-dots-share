@@ -1,0 +1,16 @@
+# ported from impasto system/usr/share/sddm/themes/impasto/metadata.desktop,
+# verbatim except: Name/Website renamed for this fork; Author line keeps
+# upstream credit alongside it, since the QML/visuals below are still his.
+
+# No ConfigFile: the theme's values are fixed in components/Theme.qml.
+
+[SddmGreeterTheme]
+Name=qml-rice
+Description=The lock screen, before there is a desk behind it (ported from impasto)
+Author=Andreu Massanet (qml-rice port)
+License=GPL-3.0
+Type=sddm-theme
+Version=1.0
+Website=https://github.com/andreumassanet/impasto
+QtVersion=6
+MainScript=Main.qml

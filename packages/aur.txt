@@ -1,0 +1,13 @@
+# AUR packages (paru/yay -S --needed). One name per line.
+# Lines starting with # are ignored -- including the "optional" ones below,
+# which install.sh does NOT install automatically; add them yourself if you
+# want the feature they unlock.
+
+wlogout
+matugen-bin
+awww-git
+
+# Optional, not installed by default:
+# ttf-google-sans    -- only used as the hyprlock clock font if you set one
+# mpvpaper           -- video wallpapers (image wallpapers work without it)
+# hyprshot-git       -- fallback screenshot tool, only used if quickshell AND slurp are both unavailable

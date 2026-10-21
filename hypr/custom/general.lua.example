@@ -1,0 +1,2 @@
+-- Copy to custom/general.lua to override general/decoration/input options.
+-- hl.config({ decoration = { rounding = 8 } })

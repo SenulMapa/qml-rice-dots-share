@@ -1,0 +1,2 @@
+singleton DashControlsService 1.0 DashControlsService.qml
+singleton DashBlocksService 1.0 DashBlocksService.qml

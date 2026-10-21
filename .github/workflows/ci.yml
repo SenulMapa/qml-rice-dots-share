@@ -1,0 +1,52 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  go:
+    name: go test & build
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: tui
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "1.24"
+      - run: go vet ./...
+      - run: go test ./...
+      - run: go build -o /tmp/qml-rice ./cmd/qml-rice
+
+  shellcheck:
+    name: shellcheck
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: shellcheck install.sh, uninstall.sh, hypr scripts
+        run: |
+          shopt -s globstar nullglob
+          files=(install.sh uninstall.sh hypr/**/*.sh)
+          echo "Checking: ${files[*]}"
+          shellcheck "${files[@]}"
+
+  lua:
+    name: lua syntax check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: install luac
+        run: sudo apt-get update && sudo apt-get install -y lua5.4
+      - name: luac -p on every hypr/*.lua file
+        run: |
+          shopt -s globstar nullglob
+          fail=0
+          for f in hypr/**/*.lua; do
+            if ! luac5.4 -p "$f"; then
+              echo "syntax error: $f"
+              fail=1
+            fi
+          done
+          exit $fail

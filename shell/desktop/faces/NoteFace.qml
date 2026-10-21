@@ -1,0 +1,62 @@
+// ╭──────────────────────────────────────────────────────────────────────────╮
+// │                                                                          │
+// │   N   O   T   E       F   A   C   E                                      │
+// │   a note as a desktop widget                                             │
+// │                                                                          │
+// │   github.com/andreumassanet/impasto                                      │
+// │                                                                          │
+// ╰──────────────────────────────────────────────────────────────────────────╯
+
+import QtQuick
+
+import "../services" as DeskServices
+import "../components"
+
+// TODO: components not yet ported
+
+// A note on the desktop, in any of the four families: the same paper the deck
+// draws. The widget draws no capsule for notes (`DeskServices.DeskDesktopService.styleOf`); the
+// paper gets the bare style's shadow.
+//
+// Read-only: the desktop never takes the keyboard, so a click opens the note in
+// the island.
+Item {
+    id: root
+
+    property var ink: DeskServices.DeskDesktopService.inkFor(null)
+
+    // The note the row names, or the front of the deck when it names none.
+    property var row: null
+    property string family: "2x2"
+
+    readonly property var note: DeskServices.NotesService.noteFor(root.row)
+
+    Sticky {
+        anchors.fill: parent
+        note: root.note
+        placeholder: "No notes yet"
+        padding: root.width > 300 ? 18 : 14
+        titleSize: root.family === "2x2" ? DeskServices.DeskTheme.fontSizeSmall : DeskServices.DeskTheme.fontSizeRegular
+        bodySize: {
+            if (root.family === "2x2")
+                return 16
+            if (root.family === "4x2")
+                return 18
+            return 20
+        }
+    }
+
+    // Disabled while arranging, so dragging does not open the note.
+    TapHandler {
+        acceptedButtons: Qt.LeftButton
+        gesturePolicy: TapHandler.ReleaseWithinBounds
+        onTapped: {
+            DeskServices.NotesService.open(root.note ? root.note.key : "")
+            DeskServices.ModuleService.requestPanel("notes")
+        }
+    }
+
+    HoverHandler {
+        cursorShape: Qt.PointingHandCursor
+    }
+}

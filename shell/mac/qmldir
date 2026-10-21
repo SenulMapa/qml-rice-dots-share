@@ -1,0 +1,34 @@
+module Odyssey.Mac
+singleton MacTokens 1.0 MacTokens.qml
+singleton MacPresence 1.0 MacPresence.qml
+singleton MacScreen 1.0 MacScreen.qml
+TahoeSurface 1.0 TahoeSurface.qml
+MacStyleRoot 1.0 MacStyleRoot.qml
+MacBanners 1.0 MacBanners.qml
+MacBanner 1.0 MacBanner.qml
+MacAvatar 1.0 MacAvatar.qml
+MacInkPill 1.0 MacInkPill.qml
+MacNotificationCenter 1.0 MacNotificationCenter.qml
+MacNotificationColumn 1.0 MacNotificationColumn.qml
+MacNotificationCard 1.0 MacNotificationCard.qml
+MacWidgetWeather 1.0 MacWidgetWeather.qml
+MacWidgetList 1.0 MacWidgetList.qml
+MacWidgetBattery 1.0 MacWidgetBattery.qml
+MacWidgetNowPlaying 1.0 MacWidgetNowPlaying.qml
+MacControlCenter 1.0 MacControlCenter.qml
+MacSpotlight 1.0 MacSpotlight.qml
+MacSpotlightPanel 1.0 MacSpotlightPanel.qml
+MacSpotlightResult 1.0 MacSpotlightResult.qml
+MacQuickLook 1.0 MacQuickLook.qml
+MacQuickLookPanel 1.0 MacQuickLookPanel.qml
+MacCallBanner 1.0 MacCallBanner.qml
+MacCcPanel 1.0 MacCcPanel.qml
+MacCcTile 1.0 MacCcTile.qml
+MacCcToggle 1.0 MacCcToggle.qml
+MacCcSlider 1.0 MacCcSlider.qml
+MacCcNowPlaying 1.0 MacCcNowPlaying.qml
+MacCcWindow 1.0 MacCcWindow.qml
+MacCallCard 1.0 MacCallCard.qml
+MacShotThumbnail 1.0 MacShotThumbnail.qml
+MacCompose 1.0 MacCompose.qml
+MacNotificationActions 1.0 MacNotificationActions.qml

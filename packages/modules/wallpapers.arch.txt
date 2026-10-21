@@ -1,0 +1,4 @@
+# Optional: the fallback wallpaper generator (scripts/generate-fallback-
+# wallpaper.sh) uses ImageMagick if present and a pure-python3 PNG writer
+# otherwise, so this isn't strictly required.
+imagemagick

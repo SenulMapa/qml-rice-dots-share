@@ -1,0 +1,4 @@
+# This repo's hard rule: every QML directory needs its own qmldir listing
+# every .qml file (see system/sddm/qml-rice/components/qmldir).
+AsciiClock 1.0 AsciiClock.qml
+PasswordField 1.0 PasswordField.qml

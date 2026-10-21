@@ -1,0 +1,16 @@
+# ported from impasto system/usr/share/sddm/themes/impasto/components/qmldir,
+# verbatim except: added the non-singleton component types explicitly (this
+# repo's hard rule is "every QML directory needs its own qmldir listing
+# every .qml file" -- upstream's own qmldir only declared the singleton,
+# relying on QQmlApplicationEngine's implicit same-directory type lookup for
+# the rest, which SDDM's greeter does support, but listing them here is
+# harmless and matches this repo's convention elsewhere).
+singleton Theme 1.0 Theme.qml
+Avatar 1.0 Avatar.qml
+BatteryRing 1.0 BatteryRing.qml
+Capsule 1.0 Capsule.qml
+PasswordField 1.0 PasswordField.qml
+PowerRow 1.0 PowerRow.qml
+RingSpinner 1.0 RingSpinner.qml
+SessionPicker 1.0 SessionPicker.qml
+UserPicker 1.0 UserPicker.qml

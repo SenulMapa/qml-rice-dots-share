@@ -1,0 +1,3 @@
+# matugen-bin is already installed by the base packages/aur.txt (the hypr
+# module depends on it for hyprland/colors.lua). Nothing extra needed here;
+# this file exists so `qml-rice modules` has a package set to point at.

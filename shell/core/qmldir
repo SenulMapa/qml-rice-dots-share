@@ -1,0 +1,16 @@
+module Odyssey.Core
+singleton Animations 1.0 Animations.qml
+singleton BlobGeometry 1.0 BlobGeometry.qml
+singleton Config 1.0 Config.qml
+singleton EdgeGeometry 1.0 EdgeGeometry.qml
+singleton SettingsStore 1.0 SettingsStore.qml
+singleton ShellActions 1.0 ShellActions.qml
+singleton ShellState 1.0 ShellState.qml
+singleton Theme 1.0 Theme.qml
+singleton Motion 1.0 Motion.qml
+singleton BlobLayout 1.0 BlobLayout.qml
+singleton DisplayScale 1.0 DisplayScale.qml
+singleton MotionFrameProbe 1.0 FrameProbe.qml
+MotionValue 1.0 MotionValue.qml
+ShellCompatShortcuts 1.0 ShellCompatShortcuts.qml
+SharePoint 1.0 SharePoint.qml

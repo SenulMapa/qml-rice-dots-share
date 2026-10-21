@@ -1,0 +1,13 @@
+[Desktop Entry]
+# Mac-apps layer: Arch /usr/bin/slack is the raw Electron binary (no flags-file reader),
+# so the native-Wayland flags live on the Exec line. --password-store keeps the keyring on gnome-libsecret.
+Name=Slack
+StartupWMClass=Slack
+Comment=Slack Desktop
+GenericName=Slack Client for Linux
+Exec=/usr/bin/slack --ozone-platform-hint=auto --enable-features=WaylandWindowDecorations --password-store=gnome-libsecret --gtk-version=3 -s %U
+Icon=slack
+Type=Application
+StartupNotify=true
+Categories=GNOME;GTK;Network;InstantMessaging;
+MimeType=x-scheme-handler/slack;

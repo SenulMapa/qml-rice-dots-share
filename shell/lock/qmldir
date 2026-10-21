@@ -1,0 +1,24 @@
+LockContext 1.0 LockContext.qml
+LockScreen 1.0 LockScreen.qml
+LockSurface 1.0 LockSurface.qml
+PamAuthenticator 1.0 PamAuthenticator.qml
+FakePamAuthenticator 1.0 FakePamAuthenticator.qml
+DiffusionText 1.0 DiffusionText.qml
+Steppers 1.0 Steppers.qml
+
+# Impasto lock-surface port (branch impasto-lock): LockShot is the
+# screenshot half of impasto's own services/LockService.qml; AccountService
+# is impasto's services/AccountService.qml (both ported verbatim except for
+# service-boundary renames, see each file's own header comment).
+singleton AccountService 1.0 AccountService.qml
+LockShot 1.0 LockShot.qml
+ImpastoAvatar 1.0 ImpastoAvatar.qml
+ImpastoLockPower 1.0 ImpastoLockPower.qml
+ImpastoLockSurface 1.0 ImpastoLockSurface.qml
+
+# ascii-lock branch: the default lock surface (DeskSettings.lockStyle ==
+# "ascii"), see AsciiLockSurface.qml's own header comment.
+AsciiLockSurface 1.0 AsciiLockSurface.qml
+
+# Liquid-glass greeter/lock surface with its own video background.
+GlassLockSurface 1.0 GlassLockSurface.qml

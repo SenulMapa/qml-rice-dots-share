@@ -1,0 +1,52 @@
+# Reviewed-false-positive allowlist for privacy-audit.sh's `regex-secret`
+# check ONLY (working tree and history blobs). Never applies to
+# gitleaks/trufflehog findings or personal-id/denylist hits -- those stay
+# hard failures no matter what.
+#
+# Format: one entry per line:
+#   sha256:<hex of the sha256 of the matched line, leading/trailing
+#           whitespace trimmed>  # <file> -- <why this is benign>
+#
+# Every entry below was reviewed by reading the actual matched line (or, for
+# history entries, the actual blob content) before being added. Blank lines
+# and lines starting with # are ignored.
+
+sha256:b82b40008e4973dc802abd353fa8b7bbe626b6317a2e9c47aaf293cad1a9dc77  # shell/HANDOVER.md:554 -- prose describing manual test steps for the lock screen, no credential
+sha256:0abde302ee4c5922653475f02da051f4f182316f551470af25d287c3bf8abc46  # shell/HANDOVER.md:1028 -- prose describing manual test steps for the lock screen, no credential
+sha256:9a304a722ff214874ae25b4ef8d201cce99493a7c048434df23c7b5942a166d1  # shell/components/ControlDetailPanel.qml:388 -- wires a text field to the wifiPassword property, no literal value
+sha256:ce179b6a3b69e39e3377122128939d5f6d666c77a5b09c27dd7bc4a34a0358c6  # shell/lock/FakePamAuthenticator.qml:21 -- fake PAM stub for the preview harness; hardcoded literal "preview" is not a real credential
+sha256:7f8ac5aa08ed068aac30cc9484469362970dd979c71194749894a341bec7282a  # shell/lock/FakePamAuthenticator.qml:26 -- assigns the (empty-default) password property in the fake PAM stub, no literal value
+sha256:1c55d64ab1e251d4a288c94352ee8f7a70937c8f4057068f650d64779b42c92f  # shell/lock/FakePamAuthenticator.qml:39 -- property declaration with empty-string default, no credential
+sha256:323af105ef5137a920bec360cf2f4b02c323a9735cc07505074b5859e4132416  # shell/lock/FakePamAuthenticator.qml:44 -- compares against the fake PAM stub's hardcoded "preview" literal, no credential
+sha256:1d080d3605f387fecf44bf1398123bd12b865bb25a23552d5ee1d05fb6e2e851  # shell/panels/ControlCenter.qml:38 -- property declaration with empty-string default, no credential
+sha256:d7e00633a2b2774953c0c6480e0a50cd3640baaecedd6d4c9bbc8b090294cf40  # shell/panels/ControlCenter.qml:222,233 -- clears wifiPassword back to empty string, no credential
+sha256:543a77c92f1bc187fb14c9ae590cd2fc79ba4090ecc74e66b07a47eac4a32219  # shell/panels/PolkitPage.qml:92 -- code comment describing UI copy for a wrong-password state, no credential
+sha256:519654649284ef1be7f91b38be3eff1204f39aaf18e65838cd9fe79c7996933d  # shell/preview-lock.qml:45 -- function signature parameter named "password", no literal value
+sha256:289e813cf68ae0f0d360a09da1bd1a535dacb6f129c9b17798fca36a8c1acb5a  # shell/services/NetworkService.qml:152 -- function signature with an empty-string default param, no credential
+sha256:b050066cca00888ed19de17def75635d6f541759049381a5ff10dcb557860547  # shell/services/PolkitService.qml:48 -- code comment discussing default label text "Password", no credential
+sha256:cb4fad4167fa45e64e4ce9ccd6cee66563ac4db5dcfa1aee865e357c1d09d6db  # shell/desktop/services/DeskNetworkService.qml -- Wi-Fi connect() signature, 'password' is a function parameter, no value
+sha256:5d1da2fb5f9c93ca80a8d92f59565fd246aed44c2300b8d20c14f3f10f80643a  # shell/system/sddm/qml-rice/Main.qml -- SDDM greeter attempt() signature, 'password' is a function parameter, no value
+sha256:1365b144bcab20eb57f30bb2d9a984284dfdebb84e0f030572af73d3d0663176  # shell/lock/AsciiLockSurface.qml:477 -- layout comment naming the date/password block, no credential
+sha256:b3b84cc327a21d345fb425f2c8d5c75cb6957c445f72104ccb7e45cc40f33bbb  # shell/lock/AsciiLockSurface.qml:495 -- layout comment naming the password field, no credential
+sha256:3030b512a873fd91c7cf4ff437412d0430036013ff2f9305cb9a4a52e71de849  # shell/system/sddm/qml-rice-ascii/Main.qml:313 -- onSubmitted callback parameter name, no credential
+sha256:39a5e4314e03ab76aa309c384b6fcdf8d242245dbeed791a7f0ac1694e1240dd  # shell/system/greetd/FakeGreetdContext.qml:30 -- dev-only test double's hardcoded literal "test" password, never installed in production
+sha256:bfc9eb45d7fd65c4a23cf58842311153be52349aab5cc5947886c9954a1b8ee0  # shell/system/greetd/FakeGreetdContext.qml:68 -- compares against the test double's hardcoded "test" literal, no credential
+sha256:f296fc7d21a55c87a64b66697a7f85e605a3e916f6cb7d2a8a9ad0d9ddef685f  # shell/components/PhoneSatelliteContent.qml:68 -- comment describing the AirPlay password reveal behaviour, no credential
+sha256:7e4072ca98c35766bb5ad157e9d77df0a5d369e31ecd6a6b296a3d5ff2babe43  # shell/render-phone.qml:65 -- preview-harness mock callback with obviously fake fixture value "fixture-airplay-pw-not-real", no credential
+sha256:67ac3dec15b72e9ea325a04393712d90e62501409c40831ba5529f683826c980  # shell/test-phone-service.qml:30 -- typeof check that airplayPassword is a function, no literal value
+sha256:f14f2d136bd1ead096f8f2c3070a67423d6cdc61d7f0f90b0a5b58de72c8eaaf  # shell/test-phone-states.qml:66 -- test double with obviously fake fixture value "fixture-airplay-pw-not-real", no credential
+sha256:1a7a5165819bd48736d2e8c707eb5ac4db72e9c4d982516cae5e90efbfd2b34d  # tools/phone/phone_glue/airplay.py:191 -- docstring stating events never carry the password, no credential
+sha256:58b1d596a25637262257fde8829b60b395926b025a394ec74e0fff1c70792ec1  # tools/phone/phone_glue/units.py:182 -- comment about systemctl --no-ask-password flag, no credential
+sha256:1f8184868cc8f3f765e3eab4145e9b91e9f3c18bff7c92c607131ee7da8a8cf9  # tools/phone/setup:514 -- help text telling the owner to run phonectl airplay-password, no credential
+sha256:da3c479273c71a25ef18e141a3da0217e5ecaba98d76143b6c283eda24412075  # tools/phone/tests/test_airplay.py:12 -- labelled fixture constant for leak tests ("fixture only"), no real credential
+sha256:73cca777f849d522f80016618576b18008a4aa9ca355eff63cff5719c0fd0fc6  # shell/components/PhoneSatelliteContent.qml:70 -- property declaration of the revealed AirPlay password field, empty-string default, no credential
+sha256:b396687849f8d754c032981497adae3ca43f4b758576a560c761ca773ab1f245  # shell/components/PhoneSatelliteContent.qml:85 -- clears the revealed AirPlay password field, no credential
+sha256:e0d46d578658f9f2cc0a52b0f3e263d9fc89bbf88ea3c151fff3c590dacd9337  # shell/components/PhoneSatelliteContent.qml:105 -- assigns the value returned by the owner-only airplay-password verb at runtime, no literal value
+sha256:db280d871f6ceb6ffc414db90bb7a295984fbbec570e4df7a6ede0c8417a7de1  # shell/components/PhoneSatelliteContent.qml:115 -- clears the revealed AirPlay password field on destruction, no literal value
+sha256:49fd7990deb0727b85759f49dc3d150f3ecf8cdd3429b53ea39e84e80eb68e17  # shell/test-phone-states.qml:207 -- comment heading for the AirPlay password reveal test, no credential
+sha256:ce0f0f4e32e5a34bddc8d0b9ffc747ae67dd376a99d87f87dbe90b881fa7e610  # shell/test-phone-states.qml:225 -- asserts the revealed AirPlay password field is empty, no credential
+sha256:37929e9e4d556507d8463fd40f4ae1672f5e810af4bab40d873cca382b3d9721  # shell/test-phone-states.qml:231 -- asserts the revealed AirPlay password field is empty after lock, no credential
+sha256:99869b60d12010468b38c6ad4c0c1bcab89ba1ea7259a76ee5063bda28383e0a  # shell/test-phone-states.qml:236 -- asserts the revealed AirPlay password field is empty after close, no credential
+sha256:623a5f35c98167a4fcb57628b6a64f6104d8e467d0e742ad9416412347718de6  # shell/test-phone-states.qml:301 -- asserts the revealed AirPlay password field is empty after timeout, no credential
+sha256:3740cd00f5208580fa6ebc183fddc1a8334745e8a1ed04b8ede49b9ecb5c6ae2  # tools/phone/phone_glue/airplay.py:209 -- docstring for the owner-only airplay-password verb, no credential
+sha256:4ced1c698bdbad17e33ff3e7b8dff2c1eae1c5b8106e39c18c2c41c9d839b2b7  # tools/phone/phone_glue/airplay.py:213 -- schema reply carrying the owner's own password over the 0600 socket, no literal value

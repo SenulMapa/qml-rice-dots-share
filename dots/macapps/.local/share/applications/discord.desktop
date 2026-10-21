@@ -1,0 +1,13 @@
+[Desktop Entry]
+# Mac-apps layer: /usr/bin/discord is a shell wrapper that execs the versioned binary with "$@" and reads no
+# flags file, so the native-Wayland flags live on the Exec line.
+Name=Discord
+StartupWMClass=discord
+Comment=All-in-one voice and text chat for gamers that's free, secure, and works on both your desktop and phone.
+GenericName=Internet Messenger
+Exec=/usr/bin/discord --ozone-platform-hint=auto --enable-features=WaylandWindowDecorations --password-store=gnome-libsecret --url -- %u
+Icon=discord
+Type=Application
+Categories=Network;InstantMessaging;
+MimeType=x-scheme-handler/discord;
+Path=/usr/bin

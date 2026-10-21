@@ -1,0 +1,12 @@
+[Unit]
+Description=macwm: macOS-like window placement for Hyprland
+PartOf=graphical-session.target
+After=graphical-session.target
+
+[Service]
+ExecStart=/usr/bin/python3 -I %h/.local/share/qml-rice/macwm/macwm.py
+Restart=on-failure
+Nice=5
+
+[Install]
+WantedBy=graphical-session.target

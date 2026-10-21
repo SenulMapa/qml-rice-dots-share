@@ -1,0 +1,51 @@
+#!/usr/bin/env bash
+# Pre-push privacy/security gate. Enable with:
+#   git config core.hooksPath .githooks
+#
+# git sends one line per ref being pushed on stdin:
+#   <local ref> <local sha> <remote ref> <remote sha>
+# Each pushed tip is audited for the objects this push would publish: every
+# object reachable from <local sha> that no remote-tracking ref already has.
+# Unpushed local branches are not audited, since their objects never leave
+# this machine. Deletes (local sha all zeros) publish nothing and are skipped.
+set -uo pipefail
+
+REPO_ROOT="$(git rev-parse --show-toplevel 2>/dev/null)"
+if [ -z "$REPO_ROOT" ]; then
+  echo "pre-push: not inside a git repo, skipping audit" >&2
+  exit 0
+fi
+
+AUDIT="$REPO_ROOT/tools/privacy-audit.sh"
+if [ ! -x "$AUDIT" ]; then
+  echo "pre-push: $AUDIT not found or not executable — refusing to push blind." >&2
+  echo "Run: chmod +x tools/privacy-audit.sh" >&2
+  exit 1
+fi
+
+PUSH_LINES="$(cat)"
+FAILED=0
+AUDITED=0
+while read -r local_ref local_sha remote_ref _remote_sha; do
+  [ -z "${local_sha:-}" ] && continue
+  if [[ "$local_sha" =~ ^0+$ ]]; then
+    echo "pre-push: deleting $remote_ref publishes nothing, skipping audit."
+    continue
+  fi
+  AUDITED=$((AUDITED+1))
+  echo "pre-push: auditing $local_ref ($local_sha) -> objects not on any remote..."
+  if ! "$AUDIT" "$REPO_ROOT" --range "$local_sha --not --remotes" </dev/null; then
+    FAILED=1
+  fi
+done <<< "$PUSH_LINES"
+
+if [ "$FAILED" = 1 ]; then
+  echo
+  echo "pre-push: BLOCKED — privacy/security audit failed. Fix the FAIL rows above" >&2
+  echo "before pushing. To bypass in a genuine emergency: git push --no-verify" >&2
+  echo "(strongly discouraged — that skips this gate entirely)." >&2
+  exit 1
+fi
+
+echo "pre-push: audit passed ($AUDITED ref(s) audited)."
+exit 0

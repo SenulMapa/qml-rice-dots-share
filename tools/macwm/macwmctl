@@ -1,0 +1,69 @@
+#!/usr/bin/env python3
+"""macwmctl: send one command to the macwm daemon and print its reply.
+
+  macwmctl status
+  macwmctl toggle-tiling [WORKSPACE]     (default: the active workspace)
+  macwmctl snap left|right|fill|restore
+  macwmctl raw '<json object>'
+"""
+import json
+import os
+import socket
+import sys
+
+
+def build(argv):
+    if not argv:
+        return None
+    verb, rest = argv[0], argv[1:]
+    if verb == "status" and not rest:
+        return {"cmd": "status"}
+    if verb == "toggle-tiling" and len(rest) <= 1:
+        cmd = {"cmd": "toggle-tiling"}
+        if rest:
+            cmd["workspace"] = int(rest[0])
+        return cmd
+    if verb == "snap" and len(rest) == 1:
+        return {"cmd": "snap", "dir": rest[0]}
+    if verb == "raw" and len(rest) == 1:
+        return json.loads(rest[0])
+    return None
+
+
+def main(argv):
+    try:
+        cmd = build(argv)
+    except ValueError:
+        cmd = None
+    if cmd is None:
+        sys.stderr.write(__doc__)
+        return 2
+    runtime = os.environ.get("XDG_RUNTIME_DIR")
+    if not runtime:
+        sys.stderr.write("macwmctl: XDG_RUNTIME_DIR is not set\n")
+        return 1
+    s = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
+    s.settimeout(3)
+    try:
+        s.connect(os.path.join(runtime, "macwm.sock"))
+        s.sendall((json.dumps(cmd) + "\n").encode())
+        data = b""
+        while not data.endswith(b"\n"):
+            chunk = s.recv(4096)
+            if not chunk:
+                break
+            data += chunk
+    except OSError as e:
+        sys.stderr.write("macwmctl: daemon not reachable (%s)\n" % e)
+        return 1
+    finally:
+        s.close()
+    sys.stdout.write(data.decode("utf-8", "replace"))
+    try:
+        return 0 if json.loads(data).get("ok") else 1
+    except ValueError:
+        return 1
+
+
+if __name__ == "__main__":
+    sys.exit(main(sys.argv[1:]))

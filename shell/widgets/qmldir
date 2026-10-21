@@ -1,0 +1,16 @@
+module Odyssey.Widgets
+WidgetLayer 1.0 WidgetLayer.qml
+WidgetHost 1.0 WidgetHost.qml
+WidgetFrame 1.0 WidgetFrame.qml
+CookieShape 1.0 CookieShape.qml
+ShapeClockWidget 1.0 ShapeClockWidget.qml
+DateWeatherWidget 1.0 DateWeatherWidget.qml
+MediaWidget 1.0 MediaWidget.qml
+BatteryRingWidget 1.0 BatteryRingWidget.qml
+EditPalette 1.0 EditPalette.qml
+AnalogClockWidget 1.0 AnalogClockWidget.qml
+DigitalClockWidget 1.0 DigitalClockWidget.qml
+CalendarWidget 1.0 CalendarWidget.qml
+TodoWidget 1.0 TodoWidget.qml
+PomodoroWidget 1.0 PomodoroWidget.qml
+SystemMonitorWidget 1.0 SystemMonitorWidget.qml

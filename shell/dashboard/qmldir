@@ -1,0 +1,14 @@
+DashDashboard 1.0 DashDashboard.qml
+DashControlsPanel 1.0 DashControlsPanel.qml
+DashOverviewPanel 1.0 DashOverviewPanel.qml
+DashBoardPanel 1.0 DashBoardPanel.qml
+DashAppearancePanel 1.0 DashAppearancePanel.qml
+DashKeysPanel 1.0 DashKeysPanel.qml
+DashPackagesPanel 1.0 DashPackagesPanel.qml
+DashStatsPanel 1.0 DashStatsPanel.qml
+DashPetPanel 1.0 DashPetPanel.qml
+DashNotesPanel 1.0 DashNotesPanel.qml
+DashGamesPanel 1.0 DashGamesPanel.qml
+DashDetailFace 1.0 DashDetailFace.qml
+DashNetworkDetail 1.0 DashNetworkDetail.qml
+DashBluetoothDetail 1.0 DashBluetoothDetail.qml

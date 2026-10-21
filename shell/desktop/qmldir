@@ -1,0 +1,18 @@
+module desktop
+
+# Main components
+Desktop 1.0 Desktop.qml
+Widget 1.0 Widget.qml
+Face 1.0 Face.qml
+Picker 1.0 Picker.qml
+Tray 1.0 Tray.qml
+Inspector 1.0 Inspector.qml
+ThemeSwatch 1.0 ThemeSwatch.qml
+
+# Faces are resolved internally via relative imports (Face.qml -> "./faces"
+# and "./faces/analogue") -- they are not part of the desktop module's public
+# QML API and are deliberately not registered here. There is no standalone
+# "ClockModern"/"ClockAnalogue" component in impasto: the modern clock face
+# lives inline in faces/Squares.qml, faces/Wides.qml, faces/Larges.qml and
+# faces/Bands.qml (dispatched by module id), and the analogue one is
+# faces/analogue/ClockFace.qml (dispatched by faces/analogue/Analogue.qml).

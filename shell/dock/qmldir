@@ -1,0 +1,6 @@
+module Odyssey.Dock
+singleton DockMetrics 1.0 DockMetrics.qml
+DockModel 1.0 DockModel.qml
+DockItem 1.0 DockItem.qml
+DockSurface 1.0 DockSurface.qml
+Dock 1.0 Dock.qml

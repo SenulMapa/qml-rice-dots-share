@@ -1,0 +1,11 @@
+tui/qml-rice
+
+# Local-only personal denylist for tools/privacy-audit.sh — never commit.
+tools/.personal-denylist
+
+# Python bytecode (holds absolute home paths; the privacy gate rejects it)
+__pycache__/
+*.pyc
+
+# agent workspace (briefs, mockups, licensed fonts): never commit
+.superpowers/

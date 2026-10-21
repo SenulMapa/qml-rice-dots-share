@@ -1,0 +1,4 @@
+-- Copy to custom/execs.lua to add your own autostart commands.
+-- hl.on("hyprland.start", function()
+--     hl.exec_cmd("my-startup-app")
+-- end)

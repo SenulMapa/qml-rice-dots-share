@@ -1,0 +1,15 @@
+TogglesBlock 1.0 TogglesBlock.qml
+PowerRow 1.0 PowerRow.qml
+ClockBlock 1.0 ClockBlock.qml
+MediaCard 1.0 MediaCard.qml
+WeatherCard 1.0 WeatherCard.qml
+NotificationList 1.0 NotificationList.qml
+TasksBlock 1.0 TasksBlock.qml
+CalendarCard 1.0 CalendarCard.qml
+AppearanceCard 1.0 AppearanceCard.qml
+PetBlock 1.0 PetBlock.qml
+GamesBlock 1.0 GamesBlock.qml
+Block 1.0 Block.qml
+BlockFace 1.0 BlockFace.qml
+BlockInspector 1.0 BlockInspector.qml
+ControlsTray 1.0 ControlsTray.qml

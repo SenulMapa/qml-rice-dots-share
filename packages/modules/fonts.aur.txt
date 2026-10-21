@@ -1,0 +1,7 @@
+# AUR fonts used directly as font.family values (Config.appearance.fontFamily
+# etc. in the shell, and hyprlock's $font_family). Moved here from the
+# top-level packages/aur.txt so they live behind the `fonts` module like
+# every other font package.
+ttf-gamja-flower
+ttf-geist
+ttf-geist-mono

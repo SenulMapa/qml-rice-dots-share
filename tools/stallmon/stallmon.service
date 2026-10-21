@@ -1,0 +1,14 @@
+[Unit]
+Description=Stall monitor: log PSI stalls over 250 ms with top processes
+Documentation=file://%h/qml-rice-dots/tools/stallmon/stallmon.py
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 -I %h/qml-rice-dots/tools/stallmon/stallmon.py
+Nice=10
+Restart=on-failure
+RestartSec=10
+MemoryMax=64M
+
+[Install]
+WantedBy=default.target

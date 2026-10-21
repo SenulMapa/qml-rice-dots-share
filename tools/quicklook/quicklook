@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+# quicklook <path>: show the file in the running shell's Quick Look window
+# (shell/mac/MacQuickLook.qml). Asking for the file already on screen closes it.
+# Thunar runs this from its "Quick Look" custom action (install-thunar.sh).
+set -euo pipefail
+
+usage() { echo "usage: quicklook <path>" >&2; exit 2; }
+[ "$#" -eq 1 ] || usage
+[ -e "$1" ] || { echo "quicklook: no such file: $1" >&2; exit 1; }
+
+target="$(realpath -- "$1")"
+
+# qml-rice resolves the shell path and runs `qs ipc call`.
+if command -v qml-rice >/dev/null 2>&1; then
+    exec qml-rice ipc quicklook toggle "$target"
+fi
+echo "quicklook: qml-rice not found on PATH; cannot reach the shell" >&2
+exit 1

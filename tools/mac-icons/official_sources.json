@@ -1,0 +1,143 @@
+{
+  "_comment": "Curated vendor-published mac icons (keyless). sha256 recorded by fetch_official.py --record after a verified fetch; mismatch = rejected. Never commit the images.",
+  "entries": [
+    {
+      "aliases": [
+        "code",
+        "code-oss",
+        "visual-studio-code",
+        "vscode",
+        "com.visualstudio.code"
+      ],
+      "id": "code",
+      "name": "Code - OSS (VS Code open-source build icon; Microsoft-branded icon is not in the repo)",
+      "repo": "microsoft/vscode",
+      "sha256": "9a8e62dcb766f84eef6debdb2d59d1222a1f102c18f8ffc9de157f1cdc509926",
+      "url": "https://raw.githubusercontent.com/microsoft/vscode/main/resources/darwin/code.icns"
+    },
+    {
+      "aliases": [
+        "codium",
+        "vscodium",
+        "com.vscodium.codium"
+      ],
+      "id": "codium",
+      "name": "VSCodium",
+      "repo": "VSCodium/vscodium",
+      "sha256": "1d325b4d4dbbadf50a6b244c79e17363d86871787c3e91be7dcee669222ce553",
+      "url": "https://raw.githubusercontent.com/VSCodium/vscodium/master/src/stable/resources/darwin/code.icns"
+    },
+    {
+      "aliases": [
+        "kitty",
+        "net.kovidgoyal.kitty"
+      ],
+      "id": "kitty",
+      "name": "kitty",
+      "repo": "kovidgoyal/kitty",
+      "sha256": "f02dc75cfacfcb786c44d6903ae48d2fed8cdde6510f2e5c731f50162049e210",
+      "url": "https://raw.githubusercontent.com/kovidgoyal/kitty/master/logo/kitty.icns"
+    },
+    {
+      "aliases": [
+        "brave-browser",
+        "brave",
+        "com.brave.Browser"
+      ],
+      "id": "brave-browser",
+      "name": "Brave",
+      "repo": "brave/brave-core",
+      "sha256": "a2099b7d16f22c0ee261e4bf233f4ce88d83c3ba123bb0dfccb2a960f97033bf",
+      "url": "https://raw.githubusercontent.com/brave/brave-core/master/app/theme/brave/mac/app.icns"
+    },
+    {
+      "aliases": [
+        "zen",
+        "zen-browser",
+        "app.zen_browser.zen"
+      ],
+      "id": "zen",
+      "name": "Zen Browser",
+      "repo": "zen-browser/desktop",
+      "sha256": "9e27e02a924c73c0101757aa6f726ec6a91f7e908bcc900e9a4dab2c8cd3e61a",
+      "url": "https://raw.githubusercontent.com/zen-browser/desktop/dev/configs/branding/release/logo.png"
+    },
+    {
+      "aliases": [
+        "firefox",
+        "org.mozilla.firefox"
+      ],
+      "id": "firefox",
+      "name": "Firefox",
+      "repo": "mozilla-firefox/firefox",
+      "sha256": "f79d69da63f9cf91d982af0551ee13cf3af2c2d7d45926aa256ef233ea3a93e3",
+      "url": "https://raw.githubusercontent.com/mozilla-firefox/firefox/main/browser/branding/official/firefox.icns"
+    },
+    {
+      "aliases": [
+        "obs",
+        "obs-studio",
+        "com.obsproject.Studio",
+        "OBS Studio"
+      ],
+      "id": "obs",
+      "name": "OBS Studio",
+      "repo": "obsproject/obs-studio",
+      "sha256": "e4f7c9445460fee874d3ab90e6ee53359fef5630a90381d22c61248ac091d033",
+      "url": "https://raw.githubusercontent.com/obsproject/obs-studio/master/cmake/macos/resources/AppIcon.icns"
+    },
+    {
+      "aliases": [
+        "arduino-ide",
+        "arduino ide"
+      ],
+      "id": "arduino-ide",
+      "name": "Arduino IDE",
+      "repo": "arduino/arduino-ide",
+      "sha256": "7d3177096c65b7841560dfad864c26d7bbf5d34cb5a0ae348d2e40e662a69a28",
+      "url": "https://raw.githubusercontent.com/arduino/arduino-ide/main/electron-app/resources/icon.icns"
+    },
+    {
+      "aliases": [
+        "moonlight",
+        "com.moonlight_stream.Moonlight"
+      ],
+      "id": "moonlight",
+      "name": "Moonlight",
+      "repo": "moonlight-stream/moonlight-qt",
+      "sha256": "89d1c951c284b8ccfa060dc60dafd742e0d8fa40a9a6ffc9f934681d721629dd",
+      "url": "https://raw.githubusercontent.com/moonlight-stream/moonlight-qt/master/app/moonlight.icns"
+    },
+    {
+      "aliases": [
+        "handy"
+      ],
+      "id": "handy",
+      "name": "Handy",
+      "repo": "cjpais/Handy",
+      "sha256": "9a6709dfaf4d07af70c477a7010738dba6f1c73ddaf719305f25e4e73e8fee32",
+      "url": "https://raw.githubusercontent.com/cjpais/Handy/main/src-tauri/icons/icon.icns"
+    },
+    {
+      "aliases": [
+        "vesktop"
+      ],
+      "id": "vesktop",
+      "name": "Vesktop",
+      "repo": "Vencord/Vesktop",
+      "sha256": "b25cdde27bd68aca5d684564e92bb3a4cfe1e437219146968ddead544143369e",
+      "url": "https://raw.githubusercontent.com/Vencord/Vesktop/main/build/icon.icns"
+    },
+    {
+      "aliases": [
+        "deskflow",
+        "org.deskflow.deskflow"
+      ],
+      "id": "deskflow",
+      "name": "Deskflow",
+      "repo": "deskflow/deskflow",
+      "sha256": "6c3ac864c0b6d09e60cd6cc683ca6dc3be32aec2a3361afa26740d343b1de222",
+      "url": "https://raw.githubusercontent.com/deskflow/deskflow/master/src/apps/res/Deskflow.icns"
+    }
+  ]
+}

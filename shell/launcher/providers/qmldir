@@ -1,0 +1,8 @@
+module Odyssey.Launcher.Providers
+singleton ApplicationsProvider 1.0 ApplicationsProvider.qml
+singleton CalculatorProvider 1.0 CalculatorProvider.qml
+singleton ClipboardProvider 1.0 ClipboardProvider.qml
+singleton FileSearchProvider 1.0 FileSearchProvider.qml
+singleton OdysseyActionsProvider 1.0 OdysseyActionsProvider.qml
+singleton WebSearchProvider 1.0 WebSearchProvider.qml
+singleton WorkspacesProvider 1.0 WorkspacesProvider.qml
