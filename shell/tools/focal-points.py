@@ -288,13 +288,17 @@ def scan_wallpaper_directories() -> List[Path]:
 def create_preview_crop(image_path: str, fx: float, fy: float, out_dir: Path = None) -> Path:
     """
     Create a 9:16 portrait preview crop centered on focal point.
-    Writes to <out_dir>/<basename>-crop.jpg (default /tmp/focal-preview/).
+    Writes to <out_dir>/<basename>-crop.jpg (default ~/.cache/focal-preview/).
     Returns the written path, or None.
     """
     if not HAS_OPENCV:
         return None
 
-    out_dir = out_dir or Path("/tmp/focal-preview")
+    if out_dir is None:
+        out_dir = Path(os.environ.get("XDG_CACHE_HOME") or Path.home() / ".cache") / "focal-preview"
+    if out_dir.is_symlink():
+        raise SystemExit(f"refusing to write previews: {out_dir} is a symlink")
+    out_dir.mkdir(parents=True, exist_ok=True, mode=0o700)
     try:
         img = cv2.imread(image_path)
         if img is None:

@@ -131,9 +131,15 @@ fi
 echo "Installing qml-rice-ascii SDDM theme:"
 echo "  $SRC -> $DEST_OUT"
 
+if [[ -n "$(find "$SRC" -type l -print -quit)" ]]; then
+    echo "error: refusing to install: symlinks in theme source:" >&2
+    find "$SRC" -type l -print >&2
+    exit 1
+fi
+
 mkdir -p "$DEST_OUT"
 if command -v rsync >/dev/null 2>&1; then
-    rsync -a --delete "$SRC/" "$DEST_OUT/"
+    rsync -a --no-owner --no-group --delete "$SRC/" "$DEST_OUT/"
 else
     rm -rf "$DEST_OUT"
     mkdir -p "$DEST_OUT"
@@ -165,6 +171,8 @@ if [[ "$DRY_RUN" -eq 1 ]]; then
 fi
 
 chmod -R go+rX "$DEST_OUT"
+chown -R root:root "$DEST_OUT"
+chmod -R go-w "$DEST_OUT"
 
 # ---- /etc/sddm.conf.d/zz-qml-rice.conf -------------------------------------
 #

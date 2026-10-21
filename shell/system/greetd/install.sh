@@ -104,6 +104,12 @@ tar -C "${SHELL_SRC}" \
     --exclude='system/greetd/README.md' \
     -cf - . | tar -C "${SHELL_DEST}" -xf -
 
+if [[ -n "$(find "${SHELL_DEST}" -type l -print -quit)" ]]; then
+    echo "error: refusing to install: symlinks in shell source:" >&2
+    find "${SHELL_DEST}" -type l -print >&2
+    exit 1
+fi
+
 if [[ -f "${SHELL_DEST}/system/greetd/FakeGreetdContext.qml" ]] \
         || [[ -f "${SHELL_DEST}/system/greetd/greeter-test.qml" ]]; then
     echo "error: test-mode files leaked into the installed tree, aborting." >&2
