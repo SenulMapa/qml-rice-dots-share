@@ -119,10 +119,16 @@ echo "==> Substituted target user '$TARGET_USER' into GreetdContext.qml"
 # the target user's home, into a root-owned location the `greeter` user can read. ---
 mkdir -p "${STATE_DEST}/odyssey" "${STATE_DEST}/qml-rice" "${CACHE_DEST}/qml-rice"
 
+# Read user-owned files as the user, never as root, and refuse symlinks, so a
+# planted link can't make this root script copy (and chmod a+r) another file.
+as_user_cat() { runuser -u "$TARGET_USER" -- cat -- "$1"; }
+
 copy_if_exists() {
     local src="$1" dest="$2"
-    if [[ -f "$src" ]]; then
-        cp -f "$src" "$dest"
+    if [[ -L "$src" ]]; then
+        echo "==> (skip) $src is a symlink, refusing to follow it as root"
+    elif [[ -f "$src" ]]; then
+        as_user_cat "$src" > "$dest"
         echo "==> Snapshotted $src -> $dest"
     else
         echo "==> (skip) $src does not exist yet, greeter will use defaults"
@@ -146,7 +152,6 @@ copy_if_exists "${SRC_CACHE_HOME}/qml-rice/palette.json" "${CACHE_DEST}/qml-rice
 MEDIA_DEST="${INSTALL_ROOT}/media"
 rm -rf "${MEDIA_DEST}"
 mkdir -p "${MEDIA_DEST}"
-as_user_cat() { runuser -u "$TARGET_USER" -- cat -- "$1"; }
 CURRENT_WP="$(as_user_cat "${SRC_STATE_HOME}/odyssey/current-wallpaper" 2>/dev/null | head -n1 || true)"
 if [[ -n "$CURRENT_WP" ]]; then
     case "${CURRENT_WP,,}" in
